@@ -136,4 +136,3 @@ for line in q8_file:
     count_file.write('\t'.join([str(int(x)) for x in line]) + '\n')
 count_file.close()
 print('total reads: ' + str(num_reads) + '\n' + 'viral reads: ' + str(virus_reads))
-#print(q8_file)

@@ -34,11 +34,7 @@ new_P3_dir = 'data/sequences/2023-05-05_passage_3/trimmed_Q20/*.txt'
 new_P4_dir = 'data/sequences/2023-05-08_passage_4/trimmed_Q20/*.txt'
 directories = [new_P1_dir, new_P2_dir, new_P3_dir, new_P4_dir]
 
-# Locations of Miseq Q20 files
-"""new_P1_dir = 'data/sequences/2023-04-17_passage_1/trimmed_Q20/*.txt'
-new_P2_dir = 'data/sequences/2023-05-01_passage_2/trimmed_Q20/*.txt'
-new_P3_dir = 'data/sequences/2023-05-05_passage_3/trimmed_Q20/*.txt'
-new_P4_dir = 'data/sequences/2023-05-08_passage_4/trimmed_Q20/*.txt'"""
+
 
 
 # Iterate through Q20 directories
