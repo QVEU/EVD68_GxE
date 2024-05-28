@@ -31,10 +31,10 @@
 
 module load minimap2/2.10
 
-# Define base directory
+# Define base directory (now fed in as input arguments)
 base_dir=$1
 
-# Define location of reference sequences
+# Define location of reference sequences (now fed in as input arguments)
 #fermon_ref="../data/sequences/fermon.fa"
 #MO_ref="../data/sequences/MO.fa"
 fermon_ref=$2
@@ -67,10 +67,10 @@ do
   # Align based on i-th reference sequence
   if (($alternate==0))
       then
-        echo minimap2 -ax map-ont MO.fa $read ">" $aligned_output
+        #echo minimap2 -ax map-ont MO.fa $read ">" $aligned_output
         minimap2 -ax map-ont $MO_ref $read > $aligned_output
       else
-        echo minimap2 -ax map-ont fermon.fa $read  ">" $aligned_output
+        #echo minimap2 -ax map-ont fermon.fa $read  ">" $aligned_output
         minimap2 -ax map-ont $fermon_ref $read > $aligned_output
   fi
 done

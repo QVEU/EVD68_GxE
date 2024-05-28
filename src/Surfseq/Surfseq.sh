@@ -62,3 +62,52 @@ done
 
 # Done with Minimap, purge
 module purge minimap2
+
+"""
+RUN SAM2Q20, RESULTING IN BARCODED Q20 FILES IN FOLDER HOLDING ORIGINAL SEQUENCES
+"""
+
+module load python
+module load numpy
+
+# Define base directory (change as needed)
+
+for dir in ${passages[@]}
+do
+	# Loop through N samples
+	N=96
+	# for i in {1..24} --> This is old code for reference
+	for i in $( eval echo {0..$N} )
+	do
+	  
+		# This function groups the i-th sample into groups of 8 (for reference sequence)
+		alternate=$(( ( (i-1)/8 ) % 2))
+
+		# There is an extra 0 in the name of the first 9 reads that will mess up location names
+		if (($i < 10))
+			then 
+				udp="barcode0"$i
+			else 
+		    	udp="barcode"$i
+		fi
+
+		# Define the location of the reads for this barcode
+		samfile=$dir"sam/"$udp".sam"
+		# Define the location of the output files (requires > to be in the string)
+		q20_output=$dir"Q20/"$udp".txt"
+
+		  # Align based on i-th reference sequence
+		if (($alternate==0))
+			then
+				echo "sam2Q20.py" $MO_re f$q20_output
+				python src/Surfseq/sam2Q20.py $MO_ref $samfile $q20_output
+			else
+				echo "sam2Q20.py" $fermon_ref $q20_output
+				python src/Surfseq/sam2Q20.py $fermon_ref $samfile $q20_output
+			fi
+		done
+
+	echo All reads have been mapped
+
+module purge python
+module purge numpy
