@@ -1,35 +1,22 @@
-# Benjamin Adam Catching
-# 2023-05-28
-# NIH-NIAID-LVD
-# Quantitative Virology and Evolution Unit
+#!/bin/bash
 
-# Job name
+# Job Name
 #$ -N Surfseq
 
-# Execute the script form the current working directory
-#$ -cwd
+#SBATCH --job-name=fastq2gatk
+#SBATCH --output=fastq2gatk.out
+#SBATCH --time=48:00:00
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --mem-per-cpu=64g
 
-# Merge the output of the script, and any error messages generated to one file
-#$ -j n
-
-# Send the output of the script to a directory called 'UGE-output' in the 
-# current working directory (cwd)
-# **NOTE: Be sure to create this directory before submitting your job, UGE 
-# scheduler will NOT create this direcotry for you**
-#$ -o .
-# Tell the job your memory requirements
-#$ -l mem_free=10G,h_vmem=12G
-
-# Send mail when the job is submitted, and when the job completes
-#$ -m be
-
-# Specify an email address to use
-#$ -M adam.catching@naiad.nih.gov
+#  Specify an email address to use
+#$ -M catchingba@nih.gov
 
 #==========================================================================#
 # This script is for steps of running Minimap2, convert each .sam file to a 
-# Q20 file of aligned basecalls, then return a dataframe of amino acid 
-# mutations in the EV-D68 genomes. Built for the EV-D68 GxE project
+# Q20 file of aligned basecalls, then 
+# EV-D68 genomes. Built for the EV-D68 GxE project
 
 """
 RUN MINIMAP ALONG ALL PASSAGES
@@ -115,8 +102,14 @@ module purge numpy
 RUN SCULPIN TO RETURN DATAFRAME WITH AMINO ACID SUBSITUTIONS FOR EACH PASSAGE
 """
 
+# Load in modules
 module load biopython
 module load pandas
 module load numpy
 
 python src/Surfseq/sculpin_v0.6.py
+
+# Be kind, rewind
+module purge biopython
+module purge pandas
+module purge numpy
