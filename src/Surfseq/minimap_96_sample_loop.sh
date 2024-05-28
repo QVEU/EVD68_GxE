@@ -32,11 +32,14 @@
 module load minimap2/2.10
 
 # Define base directory
-base_dir=/hpcdata/lvd_qve/Sequencing_Data/QVEU_Seq_0082_Nanopore_BAC_EVD68_ARTIC_P6/no_sample/20230616_1855_MN42546_FAX19209_c0ce6ce4/
+base_dir=$1
 
 # Define location of reference sequences
-fermon_ref="../data/sequences/fermon.fa"
-MO_ref="../data/sequences/MO.fa"
+#fermon_ref="../data/sequences/fermon.fa"
+#MO_ref="../data/sequences/MO.fa"
+fermon_ref=$2
+MO_ref=$3
+
 
 # Loop through N samples
 N=96

@@ -42,4 +42,4 @@ for passage in range(0, 6, 1):
 dNdS_df = pd.DataFrame(dNdS_list)
 dNdS_df.columns = ['passage', 'cell', 'temperature', 'strain', 'gene', 'replicate', 'dn/ds', 'number']
 
-dNdS_df.to_csv
+dNdS_df.to_csv('../data/dNdS.csv')
